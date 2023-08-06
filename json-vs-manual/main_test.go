@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"testing"
 )
 
@@ -42,3 +43,25 @@ func BenchmarkManualMarshalJSON(b *testing.B) {
 		_ = b
 	}
 }
+
+func BenchmarkManualMarshalJSONFmt(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		b := []byte(fmt.Sprintf("%q", email))
+		_ = b
+	}
+}
+
+// go test -bench=. -benchmem
+/*
+goos: linux
+goarch: amd64
+pkg: ok
+cpu: AMD Ryzen 5 4500U with Radeon Graphics
+BenchmarkUnmarshalJSON-6                 1634362               715.5 ns/op           192 B/op          4 allocs/op
+BenchmarkManualUnmarshalJSON-6          930185868                1.291 ns/op           0 B/op          0 allocs/op
+BenchmarkMarshalJSON-6                   2815305               390.4 ns/op            32 B/op          2 allocs/op
+BenchmarkManualMarshalJSON-6            32687058                36.40 ns/op            0 B/op          0 allocs/op
+BenchmarkManualMarshalJSONFmt-6          2455448               439.2 ns/op            32 B/op          2 allocs/op
+PASS
+ok      ok      8.673s
+*/
