@@ -1,10 +1,6 @@
 package main
 
-import (
-	"bytes"
-	"strings"
-	"testing"
-)
+/*
 
 var s string
 
@@ -34,3 +30,15 @@ func init() {
 
 	by = []byte(s)
 }
+*/
+
+/*
+goos: linux
+goarch: amd64
+pkg: ok
+cpu: AMD Ryzen 5 4500U with Radeon Graphics
+BenchmarkBytes-6           74530             17238 ns/op            2304 B/op          1 allocs/op
+BenchmarkString-6         105158             14417 ns/op            1536 B/op          1 allocs/op
+PASS
+ok      ok      3.089s
+*/
