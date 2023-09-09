@@ -1,36 +1,32 @@
 package main
 
-import (
-	"math/rand"
-	"strings"
-	"testing"
-)
-
-const str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-_"
-
-var by = []byte(str)
-
-const n = 10
-
-func BenchmarkBytes(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		var chars strings.Builder
-		chars.Grow(n)
-		for i := 0; i < n; i++ {
-			chars.WriteByte(str[rand.Intn(64)]) //nolint:gosec
-		}
-	}
-}
-
-func BenchmarkString(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		var chars strings.Builder
-		chars.Grow(n)
-		for i := 0; i < n; i++ {
-			chars.WriteByte(by[rand.Intn(64)]) //nolint:gosec
-		}
-	}
-}
+//
+// const str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-_"
+//
+// var by = []byte(str)
+//
+// const n = 10
+//
+// func BenchmarkBytes(b *testing.B) {
+// 	for i := 0; i < b.N; i++ {
+// 		var chars strings.Builder
+// 		chars.Grow(n)
+// 		for i := 0; i < n; i++ {
+// 			chars.WriteByte(str[rand.Intn(64)]) //nolint:gosec
+// 		}
+// 	}
+// }
+//
+// func BenchmarkString(b *testing.B) {
+// 	for i := 0; i < b.N; i++ {
+// 		var chars strings.Builder
+// 		chars.Grow(n)
+// 		for i := 0; i < n; i++ {
+// 			chars.WriteByte(by[rand.Intn(64)]) //nolint:gosec
+// 		}
+// 	}
+// }
+//
 
 /*
 goos: linux
