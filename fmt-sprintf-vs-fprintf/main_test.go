@@ -6,19 +6,26 @@ import (
 	"testing"
 )
 
-var longString = strings.Repeat("a", 1000) + "%s" + strings.Repeat("b", 1000)
+var longString = strings.Repeat("%s", 1000)
+var c = make([]any, 1000)
+
+func init() {
+	for i := 0; i < 1000; i++ {
+		c[i] = strings.Repeat("a", 1000)
+	}
+}
 
 func BenchmarkSprintf(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		b := new(strings.Builder)
-		b.WriteString(fmt.Sprintf(longString, "c"))
+		var b strings.Builder
+		b.WriteString(fmt.Sprintf(longString, c...))
 	}
 }
 
 func BenchmarkFprintf(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		b := new(strings.Builder)
-		fmt.Fprintf(b, longString, "c")
+		fmt.Fprintf(b, longString, c...)
 	}
 }
 
